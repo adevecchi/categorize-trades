@@ -1,6 +1,5 @@
 Context
-========
-**Identify the categories of trades in a bank´s portfolio**
+=======
 
 A bank has a portfolio of thousands of trades and they need to be categorized.
 A trade is a commercial negotiation between a bank and a client.
