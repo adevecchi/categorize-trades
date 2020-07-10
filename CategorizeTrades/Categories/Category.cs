@@ -20,20 +20,24 @@ namespace CategorizeTrades.Categories
 
             List<string> tradeCategories = new List<string>();
 
-            List<TypeRisk> risks = new List<TypeRisk> { TypeRisk.LowRisk, TypeRisk.MediumRisk, TypeRisk.HighRisk };
+            List<IRisk> risks = new List<IRisk> {
+                RiskFactory.Create(TypeRisk.LowRisk),
+                RiskFactory.Create(TypeRisk.MediumRisk),
+                RiskFactory.Create(TypeRisk.HighRisk)
+            };
 
             foreach (Trade trade in portfolio)
             {
-                foreach (TypeRisk r in Enum.GetValues(typeof(TypeRisk)))
+                foreach (IRisk r in risks)
                 {
-                    risk = RiskFactory.Create(r);
-
-                    if (trade.CalculateRisk(risk))
+                    risk = r;
+                    
+                    if (trade.CalculateRisk(r))
                     {
                         break;
                     }
                 }
-
+                
                 tradeCategories.Add(risk.Type);
             }
 

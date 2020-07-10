@@ -6,11 +6,6 @@ namespace CategorizeTrades.Risk
     {
         public string Type { get; private set; }
 
-        public HighRisk()
-        {
-            this.Type = NoneRisk.NONERISK.ToString();
-        }
-
         public bool CalculateRisk(ITrade trade)
         {
             if (trade.Value > 1000000 && trade.ClientSector.Equals(SectorRisk.Private.ToString()))
@@ -19,6 +14,8 @@ namespace CategorizeTrades.Risk
 
                 return true;
             }
+
+            this.Type = NoneRisk.NONERISK.ToString();
 
             return false;
         }
